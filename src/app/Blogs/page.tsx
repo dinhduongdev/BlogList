@@ -1,11 +1,10 @@
 "use client";
-import TableData from "./components/Table";
+import TableData from "../components/Table";
 import useSWR from "swr";
 
- 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-export default function Home() {
+const Blogs = () => {
   const { data, error, isLoading } = useSWR(
     "http://localhost:8000/blogs",
     fetcher
@@ -13,10 +12,11 @@ export default function Home() {
 
   if (error) return "An error has occurred.";
   if (isLoading) return "Loading...";
-
   return (
-    <>
+    <div>
       <TableData blogList={data} />
-    </>
+    </div>
   );
-}
+};
+
+export default Blogs;
